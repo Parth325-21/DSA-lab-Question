@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<conio.h>
+typedef struct Poly
+{
+int coeff,power;
+struct Poly *next;
+}Poly;
+void main()
+{
+int t,c,co,po;
+Poly *head1,*head2,*head3;
+void insertion(Poly **,int,int);
+void traversing(Poly *);
+void addition(Poly **,Poly *,Poly *);
+head1=head2=head3=NULL;
+printf("Enter Polynomail one\n");
+printf("How many trems in P1");
+scanf("%d",&t);
+for(c=1;c<=t;c++)
+{
+printf("enter coeff of item %d",c);
+scanf("%d",&co);
+printf("enter power of term %d",c);
+scanf("%d",&po);
+insertion(&head1,co,po);
+}
+printf("Enter Polynomail one");
+printf("How many trems in P1");
+scanf("%d",&t);
+for(c=1;c<=t;c++)
+{
+printf("enter coeff of item %d",c);
+scanf("%d",&co);
+printf("enter power of term %d",c);
+scanf("%d",&po);
+insertion(&head2,co,po);
+}
+addition(&head3,head1,head2);
+traversing(head1);
+traversing(head2);
+traversing(head3);
+getch();
+}
+void traversing(Poly *head)
+{
+while (head!=NULL)
+{
+printf("%dX^%d+",head->coeff,head->power);
+head = head->next;
+}
+}
+void insertion(Poly **h,int c,int P)
+{
+Poly *temp;
+temp=(Poly*)malloc(sizeof(Poly));
+temp->coeff=c;
+temp->power=P;
+temp->next=*h;
+*h=temp;
+}
+void addition(Poly **h3,Poly *h1,Poly *h2)
+{
+while(h1!=NULL && h2!=NULL)
+{
+if(h1->power==h2->power)
+{
+insertion(h3,h1->coeff+h2->coeff,h1->power);
+h1=h1->next;
+h2=h2->next;
+}
+else if(h1->power>h2->power)
+{
+insertion(h3,h1->coeff,h1->power);
+h1=h1->next;
+}
+else if(h2->power>h1->power)
+{
+insertion(h3,h2->coeff,h2->power);
+h2=h2->next;
+
+}}}
